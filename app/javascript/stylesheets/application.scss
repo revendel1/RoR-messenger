@@ -1,0 +1,315 @@
+// стили CSS, необходимые для задания цветов, шрифтов, стилей и прочего у пользовательсякого интерфейса
+body {
+    overflow-y: hidden;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-style: none;
+    background-color: #fafafa
+}
+
+.chatbody {
+    background-color: #fafafa;
+}
+.chats-sidebar {
+    height: 100vh;
+    border-right: 1px solid #eeeeee;
+
+    #chats {
+        height: 50%;
+        overflow-y: scroll;
+    }
+ }   
+
+.chat-room {
+    height: 100vh;
+    
+    #messages {
+        height: 78%;
+        overflow-y: scroll;
+        //padding-bottom: 100px;
+    }
+
+    .navbar {
+        border-bottom: 1px solid #eeeeee;
+       // margin-left: -15px;
+    }
+
+    .adduser {
+        font-size: 30px;
+    }
+
+    .message{
+        min-height: 59px;
+        .content-container{
+            display: inline-block;
+            .content {
+                background-color: #e1e1e1;
+                padding: 8px 16px;
+                border-radius: 20px;
+            }
+            .author {
+                font-size: 0.8rem;
+                color: #424242;
+                margin-left: 10px;
+            } 
+            .link-view {
+                color: black;
+            }
+        }
+
+        .viewfile {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+            color: #000000;
+            padding: 8px 17px;
+            background: -moz-linear-gradient(
+                top,
+                #f2f1f0 0%,
+                #8f8383);
+            background: -webkit-gradient(
+                linear, left top, left bottom,
+                from(#f2f1f0),
+                to(#8f8383));
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            border: 1px solid #8f8383;
+            -moz-box-shadow:
+                0px 1px 3px rgba(000,000,000,0.5),
+                inset 0px 0px 1px rgba(255,255,255,0.5);
+            -webkit-box-shadow:
+                0px 1px 3px rgba(000,000,000,0.5),
+                inset 0px 0px 1px rgba(255,255,255,0.5);
+            box-shadow:
+                0px 1px 3px rgba(000,000,000,0.5),
+                inset 0px 0px 1px rgba(255,255,255,0.5);
+            text-shadow:
+                0px -1px 0px rgba(000,000,000,0.7),
+                0px 1px 0px rgba(255,255,255,0.3);
+            display: inline-block;
+            text-decoration: none;
+        }
+        .viewfile:hover {
+            background: -moz-linear-gradient(
+                top,
+                #42aaff 0%,
+                #0d5aa7);
+            background: -webkit-gradient(
+                linear, left top, left bottom,
+                from(#42aaff),
+                to(#0d5aa7));
+        }
+        .viewfile:active {
+            background: -moz-linear-gradient(
+                top,
+                #003366 0%,
+                #42aaff);
+            background: -webkit-gradient(
+                linear, left top, left bottom,
+                from(#003366),
+                to(#42aaff));
+        }
+
+        &.me{
+            .content-container {
+                float: right;
+                max-width: 70%;
+                .content {
+                    background-color: blue;
+                    color: white;
+                }
+                .imagesize {
+                    max-width: 600px;
+                }
+                .link-view {
+                    color: white;
+                }
+            }
+
+            .viewfile {
+                color: #ffffff;
+                background: -moz-linear-gradient(
+                    top,
+                    #42aaff 0%,
+                    #003366);
+                background: -webkit-gradient(
+                    linear, left top, left bottom,
+                    from(#42aaff),
+                    to(#003366));
+                border: 1px solid #003366;
+            }
+            .viewfile:hover {
+                background: -moz-linear-gradient(
+                    top,
+                    #42aaff 0%,
+                    #0d5aa7);
+                background: -webkit-gradient(
+                    linear, left top, left bottom,
+                    from(#42aaff),
+                    to(#0d5aa7));
+            }
+            .viewfile:active {
+                background: -moz-linear-gradient(
+                    top,
+                    #003366 0%,
+                    #42aaff);
+                background: -webkit-gradient(
+                    linear, left top, left bottom,
+                    from(#003366),
+                    to(#42aaff));
+            }
+        }
+        &.theirs{
+            .content-container {
+                max-width: 70%;
+            }
+        }
+    }
+    .chat-box{
+        position: absolute;
+        bottom: -5px;
+        padding: 20px;
+        padding-bottom: 30px;
+        width: 100%;
+        margin-left: -10px;
+        background-color: white;
+        border-top: 1px solid #eeeeee;
+        input[type=text] {
+            height: 45px;
+            font-size: 18px;
+            padding: 8px;
+        }
+        .btn {
+            height: 45px;
+        }
+    }
+}
+
+.card.no-outline {
+    border: none;
+}
+
+.room-link {
+    &:hover {
+      text-decoration: none;
+    }
+    .room-card {
+        transition: background-color 0.5s ease;
+        border-radius: 20px;
+        width: 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        &:hover {
+            background-color: #eeeeee;
+        }
+        &.active {
+            background-color: black;
+            .name {
+                color: white;
+            }
+            .member-count {
+                color: #e0e0e0;
+            }
+        }
+        .name {
+            font-weight: bold;
+            color: black;
+        }
+        .member-count{
+            color: #777777;
+            font-weight: light;
+        }
+
+        .namechat {
+            flex-grow: 8;
+        }
+    
+        .deletecol {
+            flex-grow: 2;
+        }
+
+    }
+}
+.card {
+    width: 400px;
+    background-color: #fff;
+    border: none;
+    border-radius: 12px
+}
+
+.form-control {
+    margin-top: 10px;
+    height: 48px;
+    border: 2px solid #eee;
+    border-radius: 10px
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border: 2px solid #039BE5
+}
+
+.confirm-button {
+    height: 50px;
+    border-radius: 10px
+}
+.linkcolor {
+    background-color: #9f9;
+    color: black;
+    border: none;
+}
+
+.select {
+  appearance: none;
+  background-color: transparent;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+}
+
+.selectwidth {
+    width: 270px;
+    border: none;
+}
+
+.activity-status {
+    font-size: 20px;
+    float: left;
+    margin-top: -5px;
+    margin-right: 4px;
+    color: #949494;
+    &.online {
+        color: red;
+    }
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
+}
+
+.inputfile + label {
+	cursor: pointer;
+}

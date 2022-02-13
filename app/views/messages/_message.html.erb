@@ -1,0 +1,39 @@
+<!-- Отображение сообщения только при наличии в нем текста или прикрепленного файла -->
+<% if message.content? || message.file? %> 
+    <!-- Разделение сообщений на сообщения от текущего пользователя или от кого-то другого -->
+    <div class="message mb-2 <%= 'me' if message.user == current_user %><%= 'theirs' if message.user != current_user %>">
+        <div class="content-container">
+                <div class="author">
+                    <!-- Точка, служащая для того, чтобы увидеть, находится ли пользователь в сети или нет -->
+                    <span class='activity-status user-<%= message.user.id %>-status'>
+                        •
+                    </span>
+                    <!-- Логин пользователя, написавшего сообщение-->
+                    <%= message.user.login %>
+                </div>
+                <% if message.content? %>
+                    <div class="content <%= 'marginfromfile' if (message.content? && message.file?) %>">
+                        <%= message.content %>
+                        <% if message.file? %>
+                                <div>
+                                    <% if message.file.content_type =~ /image/ %>
+                                        <!-- <%= link_to(image_tag(message.file.url, alt: 'Image'), message.file.url) %> -->
+                                        <%= link_to 'View Image', message.file.url, class: "viewfile" %> 
+                                    <% else %>
+                                        <%= link_to 'View File', message.file.url, class: "viewfile" %> 
+                                    <% end %>
+                                </div>
+                        <% end %>
+                    </div>
+                <% elsif message.file?%> 
+                    <div>
+                        <% if message.file.content_type =~ /image/ %>
+                            <%= link_to 'View Image', message.file.url, class: "viewfile" %> 
+                        <% else %>
+                            <%= link_to 'View File', message.file.url, class: "viewfile" %> 
+                        <% end %>
+                    </div>
+                <% end %> 
+        </div>
+    </div>
+<% end %> 

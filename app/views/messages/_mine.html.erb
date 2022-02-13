@@ -1,0 +1,22 @@
+<div class="message mb-2 me">
+    <div class="content-container">
+        <div class="author">
+            <span class='activity-status online user-<%= message.user.id %>-status'>
+                •
+            </span>
+            <%= message.user.login %>
+        </div>
+        <div class="content">
+            <%= message.content %>
+            <% if message.file? %>
+                <div class="fileview">
+                    <% if message.file.content_type =~ /image/ %>
+                        <%= link_to(image_tag(message.file.thumb.url, alt: 'Image'), message.file.url) %>
+                    <% else %>
+                        <%= link_to 'View File', message.file_url, class: "link-view" %> 
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

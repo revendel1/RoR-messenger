@@ -1,0 +1,58 @@
+<!-- Окно регистрации. Пользователю предлагается зарегистрироваться, перейти к авторизации или вернуться назад -->
+<%= form_with(model: user, local: true) do |form| %>
+  <div class="container mt-5 mb-5 d-flex justify-content-center">
+    <div class="card px-1 py-4">
+        <div class="card-body">
+            <% if user.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+                  <ul>
+                    <% user.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+            <% end %>
+            <h3 class="card-title mb-3">Зарегистрироваться</h3>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <%= form.label :login, "Логин" %>
+                        <div class="input-group"> 
+                          <%= form.text_field :login, class: 'form-control' %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <%= form.label :password, "Пароль" %>
+                        <div class="input-group"> 
+                          <%= form.password_field :password, class: 'form-control' %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <%= form.label :password_confirmation, "Подтвердите пароль" %>
+                        <div class="input-group"> 
+                          <%= form.password_field :password_confirmation, class: 'form-control' %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+              <p><%= form.submit "Зарегистрироваться", class: "btn btn-primary btn-block confirm-button" %></p>
+            </div>
+            <div class="row">
+            <div class="col-sm-12">
+              <%= link_to 'На главную страницу', root_url, class: 'btn btn-primary btn-block linkcolor'%>
+            </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<% end %>

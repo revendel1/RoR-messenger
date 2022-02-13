@@ -1,0 +1,35 @@
+<!-- Форма для добавления пользователя в чат -->
+<%= form_with(model: @chat, local: true) do |form| %>
+    <div class="container mt-5 mb-5 d-flex justify-content-center">
+    <div class="card px-1 py-4">
+        <div class="card-body">
+            <h3 class="card-title mb-3">Добавление пользователя в чат</h3>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <%= form.label "Выберите пользователя из списка: " %>
+                        <div class="input-group"> 
+                          <!-- Выбираем из базы данных пользователей, еще не находящихся в чате и заносим их в select_tag-->
+                          <% @allstructs = User.all.map {|usr| [usr.login, usr.id]} %>
+                          <% @userid_array = [] %>
+                          <% @allstructs.each { |struct| if @chat.userlist.exclude?(struct[1]) then @userid_array.push(struct) end } %>
+                          <%= select_tag "useradd", options_for_select(@userid_array), class: "select" %> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <div class="col-sm-14">
+                <!-- Добавляем выбранного с помощью select_tag пользователя в чат-->
+                <p><%= form.submit "Добавить", class: "btn btn-primary btn-block confirm-button" %></p>
+                </div>
+            </div>
+            <div class="col-sm-14">
+              <p><%= link_to 'Вернуться назад', chats_path, class: 'btn btn-primary btn-block linkcolor'%></p>
+            </div>
+        </div>
+    </div>
+    </div>
+<% end %>
+
+

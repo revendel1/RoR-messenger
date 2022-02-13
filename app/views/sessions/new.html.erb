@@ -1,0 +1,44 @@
+<!-- Окно авторизации. Пользователю предлагается ввести свои логин и пароль, перейти к странице регистрации или вернуться назад-->
+<%= form_tag sessions_path, class: 'form-signin form-group' do |form| %>
+  <div class="container mt-5 mb-5 d-flex justify-content-center">
+    <div class="card px-1 py-4">
+        <div class="card-body">
+            <p id='alert'><%= alert %></p>
+            <h2 class="card-title mb-3">Войти</h2>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <%= label_tag :login, "Логин" %>
+                        <div class="input-group"> 
+                          <%= text_field_tag :login, '', class: 'form-control col-xs-6' %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <%= label_tag :password, "Пароль" %>
+                        <div class="input-group"> 
+                          <%= password_field_tag :password, '', class: 'form-control col-xs-6' %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <p><%= submit_tag 'Войти', class: 'btn btn-primary btn-block confirm-button'%></p>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                  <p><%= link_to 'Зарегистрироваться', signup_url, class: 'btn btn-primary btn-block linkcolor'%></p>
+                </div>
+                <div class="col-sm-12">
+                  <p><%= link_to 'На главную страницу', root_url, class: 'btn btn-primary btn-block linkcolor'%></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<% end %>

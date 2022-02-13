@@ -1,0 +1,93 @@
+<!-- Проверка авторизован ли пользователь -->
+<% if current_user %> 
+  <div id="chat-id" data-chat-id="<%= @chat.try(:id) %>"></div>
+  <div id="user-id" data-user-id="<%= current_user.id %>"></div>
+
+  <div class="container-fluid chatbody">
+    <div class="row">
+      <div class="col-3 chats-sidebar">
+        <div class="card no-outline">
+          <div class="card-body chatbody">
+            <!-- Информация о текущем имени пользователя -->
+            <small>Ваш никнейм:</small><br>
+            <b><%= current_user.login %> <br></b>
+            <%= link_to 'Выйти', logout_path %>
+          </div>
+        </div>
+        <hr>
+        <div class="chats-list">
+          <!-- Отображение формы для создания нового чата -->
+          <%= render 'form', chat: Chat.new %>
+        </div>
+        <hr>
+        <div id="chats">
+          <% @chats.each do |chat| %>
+            <!-- Проверяет для каждого чата, есть ли у пользователя доступ к нему. Если есть, то отображает его -->
+            <% if chat.userlist.include?(current_user.id) %>
+              <%= link_to chat, class: "room-link" do %>
+                <% active_class = (@chat == chat) ? 'active' : '' %>
+                <div class="card no-outline mb-3 room-card <%= active_class %>">
+                  <div class="card-body namechat">
+                    <!--Информация о названии чата и текущем количестве участников в нем -->
+                    <span class="name"><b><%= chat.name %></b></span><br>
+                    <span class="member-count"><small><%= chat.userlist.uniq.count %> участник(-ов)</small></span>
+                  </div>
+                  <div class="card-body deletecol">
+                    <table>
+                    <!-- Предоставление возможности покинуть чат -->
+                    <td><%= link_to '✖', chat, method: :delete, data: { confirm: 'Вы действительно хотите покинуть чат?' } %></td>
+                    </table>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="col-9">
+        <% if @chat.present? %>
+          <div class="chat-room">
+            <nav class="navbar navbar-light">
+              <span class="navbar-brand" href="#">
+                <b><%= @chat.name %></b>
+              </span>
+              <!-- Выбирает из базы данных пользователей, имеющих доступ к данном чату и записывает их в select_tag -->
+              <% @allusers = User.all.map {|usr| [usr.login, usr.id]} %>
+              <% @users_array = [] %>
+              <% @allusers.each { |usr| if @chat.userlist.include?(usr[1]) then @users_array.push(usr) end } %>
+              <%= select_tag "users", options_for_select(@users_array), prompt: "Список участников (развернуть)",  class: "select selectwidth" %> 
+              <!-- Ссылка на страницу с добавлением новых пользователей в чат-->
+              <small><%= link_to '+', edit_chat_path(@chat), class: "adduser" %></small>
+            </nav>
+            <div class = "chat-box">
+              <!-- Отображение формы для создания нового сообщения-->
+              <%= render 'messages/form', message: Message.new, chat: @chat %>
+            </div>
+            <div id="messages">
+              <!-- С помощью цикла отображаются все сообщения в выбранном чате -->
+              <% @chat.messages.each do |message| %>
+                <%= render 'messages/message', message: message %> 
+              <% end %>
+            </div>   
+          </div>
+        <% end %>
+      </div>
+    </div> 
+  </div>
+
+<% else %>
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Мессенджер</h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+      <span class="p-2 text-dark"><%= link_to 'Зарегистрироваться', signup_path, class: "sign-in-link" %></span>
+      <span class="p-2 text-dark"><%= link_to 'Войти', login_path %></span>
+    </nav>
+  </div>
+  <div class='container'>
+    <div class='hero-unit'>            
+      <h1>Добро пожаловать!</h1>
+      <p>Для использования месенджера Вам необходимо авторизоваться.</p>
+    </div>
+  </div>
+<% end %>

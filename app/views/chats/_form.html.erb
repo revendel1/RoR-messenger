@@ -1,0 +1,22 @@
+<!-- Форма для создания нового чата -->
+<%= form_with(model: chat, local: true) do |form| %>
+  <% if chat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(chat.errors.count, "error") %> prohibited this chat from being saved:</h2>
+
+      <ul>
+        <% chat.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group mb-3">
+    <%= form.label "Создать новый чат" %>
+    <%= form.text_field :name, class: 'form-control', placeholder: "Название" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Создать", class: "btn btn-primary btn-block" %>
+  </div>
+<% end %>
