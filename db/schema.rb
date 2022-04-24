@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-# Сведения о таблицах в базе данных
-ActiveRecord::Schema.define(version: 2021_11_07_141010) do
+ActiveRecord::Schema.define(version: 2022_04_23_110712) do
 
   create_table "chats", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "userlist"
@@ -33,7 +32,7 @@ ActiveRecord::Schema.define(version: 2021_11_07_141010) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "login"
+    t.string "login", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"

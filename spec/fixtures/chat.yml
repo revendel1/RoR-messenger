@@ -1,0 +1,10 @@
+one:
+  id: 10
+  name: "Chat number 1"
+  userlist: [1,2]
+  useradd: 1
+two:
+  id: 20
+  name: "Chat number 2"
+  userlist: [2,3]
+  useradd: 2

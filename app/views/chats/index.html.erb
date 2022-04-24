@@ -11,7 +11,7 @@
             <!-- Информация о текущем имени пользователя -->
             <small>Ваш никнейм:</small><br>
             <b><%= current_user.login %> <br></b>
-            <%= link_to 'Выйти', logout_path %>
+            <%= link_to 'Выйти', logout_path, method: :delete %>
           </div>
         </div>
         <hr>
