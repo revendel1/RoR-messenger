@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
-  #get 'sessions/new'
-  #get 'sessions/create'
-  #get 'sessions/destroy'
-  #get 'chats/new'
   resources :messages
   resources :chats
   resources :users
